@@ -17,6 +17,8 @@ profile
 # Objective-C/Swift specific
 *.hmap
 *.ipa
+*.dSYM.zip
+*.dSYM
 
 ####
 # Xcode build files
@@ -26,10 +28,19 @@ Builds/
 
 #####
 # Xcode private settings (window sizes, bookmarks, breakpoints, custom executables, smart groups)
+#
+# This is complicated:
+#
+# SOMETIMES you need to put this file in version control.
+# Apple designed it poorly - if you use "custom executables", they are
+#  saved in this file.
+# 99% of projects do NOT use those, so they do NOT want to version control this file.
+#  ..but if you're in the 1%, comment out the line "*.pbxuser"
 *.pbxuser
 *.mode1v3
 *.mode2v3
 *.perspectivev3
+#    NB: also, whitelist the default ones, some projects need to use these
 !default.pbxuser
 !default.mode1v3
 !default.mode2v3
@@ -83,6 +94,7 @@ Carthage/Build.rbenv-vars
 
 ####
 # Fastlane
+/fastlane/test_output
 # Temporary profiling data
 /fastlane/report.xml
 # Deliver temporary error output
@@ -90,6 +102,7 @@ Carthage/Build.rbenv-vars
 # Deliver temporary preview output
 /fastlane/Preview.html
 # Snapshot generated screenshots
+/fastlane/screenshots/**/*.png
 /fastlane/screenshots/*/*-portrait.png
 /fastlane/screenshots/*/*-landscape.png
 /fastlane/screenshots/screenshots.html
@@ -100,3 +113,18 @@ Carthage/Build.rbenv-vars
 ####
 # rbenv
 .rbenv-vars
+
+# Code Injection
+#
+# After new code Injection tools there's a generated folder /iOSInjectionProject
+# https://github.com/johnno1962/injectionforxcode
+
+iOSInjectionProject/
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+Packages/
+Package.pins
+Package.resolved
+.build/
